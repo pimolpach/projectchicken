@@ -1,0 +1,468 @@
+{% extends "base.html" %}
+
+{% block title %}
+<title>หน้าแรกของเว็บไซต์ by 67149028</title>
+{% endblock %}
+
+{% block content %}
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="/static/css/style.css">
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+    body {
+        font-family: "Kanit", sans-serif;
+        background: #fff;
+        padding: 0;
+    }
+    h1 {
+        padding-top: 50px;
+        padding-left: 40px;
+        color: black;
+    }
+    h2 {
+        font-size: 1.2rem;
+        text-align: center;
+        padding-top: 10px;
+        color: whitesmoke;
+    }
+    h3 {
+        padding-top: 20px;
+    }
+    #menuSearch {
+        padding: 12px 16px;
+        font-size: 16px;
+        border-radius: 25px;
+        border: 1px solid #ccc;
+        width: 100%;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        transition: all 0.3s ease-in-out;
+    }
+    #menuSearch:focus {
+        border-color: #007bff;
+        box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.2);
+        outline: none;
+    }
+    .menu-item {
+        width: 100%;
+        margin: 20px auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between; 
+        padding: 20px 100px;
+        background-color: rgba(255, 114, 54, 0.868);
+        text-align: left;
+    }
+    .menu-item p {
+        margin: 0;
+        flex: 1;
+        font-size: 1.1rem;
+    }
+    .modal {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+    .main-content {
+        flex-grow: 1;
+        padding: 20px;
+        background-color: #fff;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        margin-left: 300px;
+    }
+    .order-option {
+        background-color: #ff0000;
+        color: white;
+        border: none;
+        padding: 15px 30px;
+        margin: 10px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+    .order-option:hover {
+        background-color: #d50000;
+    }
+    .sidebar {
+        width: 200px; 
+        background-color: #fff;
+        color: black;
+        padding: 20px;
+        flex-direction: column;
+        height: 100vh; 
+        box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.1); 
+    }
+    .sidebar h1 {
+        font-size: 1.8rem;
+        margin-bottom: 20px;
+        font-weight: 600; 
+    }
+    .sidebar ul {
+        list-style-type: none;
+        padding-left: 0;
+        margin: 0;
+    }
+    .sidebar ul li {
+        white-space: normal;
+        word-wrap: break-word;
+        width: 100%;
+        line-height: 1.5;
+        padding: 10px 0;
+        cursor: pointer;
+    }
+    .sidebar ul li:hover {
+        background-color: #b6c0c9;
+        padding-right: 20px;
+    }
+    .sidebar ul li:first-child {
+        margin-top: 0;
+    }
+    .sidebar ul li:last-child {
+        margin-bottom: 0;
+    }
+    .main-content h2 {
+        font-size: 2rem;
+        margin-bottom: 20px;
+    }
+    .reward-button {
+        background-color: #e67e22;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        font-size: 1.2rem;
+        cursor: pointer;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+    }
+    .reward-button:hover {
+        background-color: #d35400;
+    }
+    .search-bar {
+        width: 100%;
+        padding: 10px;
+        margin-top: 20px;
+        margin-bottom: 30px;
+        font-size: 1rem;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+    .promotion-items {
+        display: flex;
+        gap: 20px;
+        justify-content: space-between;
+    }
+    .promotion-items .item {
+        width: 100%;
+        background-color: #ecf0f1;
+        padding: 15px;
+        border-radius: 10px;
+        text-align: center;
+    }
+    .promotion-items .item img {
+        width: 100%;
+        height: auto;
+        margin-top: 10px;
+        border-radius: 5px;
+    }
+    .promotion-items .item:hover {
+        background-color: #bdc3c7;
+    }
+    footer .nav-link:active, footer .bi:active {
+    background-color: #444;
+    color: #fff;
+    }
+</style>
+<body>
+    <!-- Navbar 1 -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                {% load static %}
+                <img src="{% static 'image/G1.png' %}" alt="" width="40%" class="d-inline-block align-text-top">
+            </a>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="/about">เมนู</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/">รีวอร์ดส</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/form">เข้าสู่ระบบ</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Navbar 2 -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top" style="top: 100px; z-index: 1020;">
+        <div class="container">
+            <div class="d-flex align-items-center justify-content-center w-100">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <h2 class="text-white mt-2 me-4">สั่งได้ทั้งแบบรับที่ร้านหรือเดลิเวอรี</h2>
+                <button class="btn btn-danger startOrderBtn">เริ่มสั่งอาหาร</button>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Modal -->
+    <div class="modal" id="orderModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 1050;">
+        <div class="modal-content" style="background: white; margin: 10% auto; padding: 20px; max-width: 800px; height: 300px; border-radius: 8px; text-align: center;">
+            <div class="position-relative">
+                <button type="button" class="btn-close position-absolute top-0 end-0 m-3" id="closeModalBtn" aria-label="Close"></button>
+            </div>              
+            <h3>เลือกช่องทางการรับอาหาร</h3>
+            <button class="order-option btn btn-outline-primary m-2">รับที่ร้าน</button>
+            <button class="order-option btn btn-outline-success m-2">เดลิเวอรี</button>
+        </div>
+    </div>
+
+<div style="display: flex;">
+    <div class="sidebar">
+        <h1>เมนู</h1>
+        <ul>
+            <li>โปรโมชัน</li>
+            <li>อิ่มเดี่ยว</li>
+            <li>2 ท่านขึ้นไป</li>
+            <li>ชุดทานเล่น</li>
+            <li>ไก่ทอด</li>
+            <li>ข้าว</li>
+        </ul>
+    </div>
+
+{% load static %}
+    <div class="main-content">
+        <h1>รีวิวอร์ดส</h1>
+        <div class="menu-item">
+            <p>เพื่อใช้ เคอีพีซี รีวิวอร์ดส เลือกช่องทางการรับอเดอร์</p>
+            <button class="btn btn-light startOrderBtn">เริ่มสั่งอาหาร</button>
+        </div>
+        <input type="text" placeholder="🔍 ค้นหาเมนูของเรา" class="form-control search-bar my-3" id="menuSearch">
+        
+        <h3 id="โปรโมชัน">โปรโมชัน</h3>
+        <div class="promotion-items">
+            <div class="item">
+                <img src="{% static 'image/G4.png' %}" alt="Item 1">
+                โปรโมชัน 1
+            </div>
+            <div class="item">
+                <img src="{% static 'image/G4.png' %}" alt="Item 2">
+                โปรโมชัน 2
+            </div>
+            <div class="item">
+                <img src="{% static 'image/G4.png' %}" alt="Item 3">
+                โปรโมชัน 3
+            </div>
+        </div>
+
+        <h3 id="อิ่มเดี่ยว">อิ่มเดี่ยว</h3>
+        <div class="promotion-items">
+            <div class="item">
+                <img src="{% static 'image/G5.png' %}" alt="Item 1">
+                อิ่มเดี่ยว 1
+            </div>
+            <div class="item">
+                <img src="{% static 'image/G5.png' %}" alt="Item 2">
+                อิ่มเดี่ยว 2
+            </div>
+            <div class="item">
+                <img src="{% static 'image/G5.png' %}" alt="Item 3">
+                อิ่มเดี่ยว 3
+            </div>
+        </div>
+
+        <h3 id="2 ท่านขึ้นไป">2 ท่านขึ้นไป</h3>
+        <div class="promotion-items">
+            <div class="item">
+                <img src="{% static 'image/G8.png' %}" alt="Item 1">
+                2 ท่านขึ้นไป 1
+            </div>
+            <div class="item">
+
+                <img src="{% static 'image/G8.png' %}" alt="Item 2">
+                2 ท่านขึ้นไป 2
+            </div>
+            <div class="item">
+                
+                <img src="{% static 'image/G8.png' %}" alt="Item 3">
+                2 ท่านขึ้นไป 3
+            </div>
+        </div>
+
+        <h3 id="ชุดทานเล่น">ชุดทานเล่น</h3>
+        <div class="promotion-items">
+            <div class="item">
+                <img src="{% static 'image/G9.png' %}" alt="Item 1">
+                ชุดทานเล่น 1
+            </div>
+            <div class="item">
+                <img src="{% static 'image/G9.png' %}" alt="Item 2">
+                ชุดทานเล่น 2
+            </div>
+            <div class="item">
+                <img src="{% static 'image/G9.png' %}" alt="Item 3">
+                ชุดทานเล่น 3
+            </div>
+        </div>
+
+        <h3 id="ไก่ทอด">ไก่ทอด</h3>
+        <div class="promotion-items">
+            <div class="item">
+                <img src="{% static 'image/G3.png' %}" alt="Item 1">
+                ไก่ทอด 1
+            </div>
+            <div class="item">
+                <img src="{% static 'image/G3.png' %}" alt="Item 2">
+                ไก่ทอด 2
+            </div>
+            <div class="item">
+                <img src="{% static 'image/G3.png' %}" alt="Item 3">
+                ไก่ทอด 3
+            </div>
+        </div>
+
+        <h3 id="ข้าว">ข้าว</h3>
+        <div class="promotion-items">
+            <div class="item">
+                <img src="{% static 'image/G10.png' %}" alt="Item 1">
+                ข้าว 1
+            </div>
+            <div class="item">
+                <img src="{% static 'image/G10.png' %}" alt="Item 2">
+                ข้าว 2
+            </div>
+            <div class="item">
+                <img src="{% static 'image/G10.png' %}" alt="Item 3">
+                ข้าว 3
+            </div>
+        </div>
+    </div>
+</div>    
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4">
+        <div class="container">
+            <div class="row row-cols-1 row-cols-md-5 g-4">
+                <div>
+                    <h3>เมนู</h3>
+                    <ul class="list-unstyled">
+                        <li><a class="nav-link text-white" href="/">เมนู</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>ข้อมูลสารก่อภูมิแพ้</h3>
+                    <ul class="list-unstyled">
+                        <li><a class="nav-link text-white" href="/">ข้อมูลสารก่อภูมิแพ้</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>ช่วยเหลือ</h3>
+                    <ul class="list-unstyled">
+                        <li><a class="nav-link text-white" href="/">คำถามที่พบบ่อย</a></li>
+                        <li><a class="nav-link text-white" href="/">ติดต่อ Fried Chicken</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>Fried Chicken</h3>
+                    <ul class="list-unstyled">
+                        <li><a class="nav-link text-white" href="/">เมนูจัดเลี้ยง</a></li>
+                        <li><a class="nav-link text-white" href="/">เกี่ยวกับ Fried Chicken</a></li>
+                        <li><a class="nav-link text-white" href="/">สังคมที่ยั่งยืน</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>ร่วมงานกับเรา</h3>
+                    <ul class="list-unstyled">
+                        <li><a class="nav-link text-white" href="/">ร่วมงานกับ Fried Chicken</a></li>
+                    </ul>
+                </div>
+            </div>
+    
+            <hr class="border-secondary mt-4">
+            <p class="text-center small">นโยบายความเป็นส่วนตัว Fried Chicken | &copy; 2025 Fried Chicken</p>
+            
+            <div class="d-flex justify-content-center gap-3 mt-3">
+                <i class="bi bi-facebook" style="background-color:white; color:black; padding: 10px; border-radius:100%;"></i>
+                <i class="bi bi-line" style="background-color:white; color:black; padding: 10px; border-radius:100%;"></i>
+                <i class="bi bi-instagram" style="background-color:white; color:black; padding: 10px; border-radius:100%;"></i>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const startButtons = document.querySelectorAll('.startOrderBtn');
+        const modal = document.getElementById('orderModal');
+        const closeModalBtn = document.getElementById('closeModalBtn');
+        
+        // เปิด modal
+        startButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                modal.style.display = 'block';
+            });
+        });
+        
+        // ปิด modal
+        closeModalBtn.addEventListener('click', () => {
+            modal.style.display = 'none';
+        });
+        
+        // ปิดเมื่อคลิกด้านนอก modal-content
+        window.addEventListener('click', function(event) {
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+    </script>
+
+    <script>
+    // Select all menu items in the sidebar
+    const menuItems = document.querySelectorAll('.sidebar ul li');
+
+    // Loop through each item to add a click event listener
+    menuItems.forEach(item => {
+        // Get the text content of the menu item
+        const sectionId = item.textContent.trim();
+
+        // Check if there's a corresponding section with an id that matches the menu item text
+        const section = document.getElementById(sectionId);
+
+        if (section) {
+            // If the section exists, add the click event listener
+            item.addEventListener('click', function() {
+                // Calculate the position of the section to scroll to
+                const navbarHeight = document.querySelector('nav') ? document.querySelector('nav').offsetHeight : 0;
+        
+                // Scroll to the section with an offset for the navbar
+                window.scrollTo({
+                    top: section.offsetTop - navbarHeight - navbarHeight / 2,
+                    behavior: 'smooth'
+                });
+            });
+        }
+    });
+    </script>
+
+    <script>
+        document.getElementById('menuSearch').addEventListener('keyup', function() {
+            let filter = this.value.toLowerCase();
+            let items = document.querySelectorAll('#menuList li');
+    
+        items.forEach(function(item) {
+        if (item.textContent.toLowerCase().includes(filter)) {
+          item.style.display = '';
+        } else {
+          item.style.display = 'none';
+        }
+        });
+        });
+    </script>
+  
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+{% endblock %}
